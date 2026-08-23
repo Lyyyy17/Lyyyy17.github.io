@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Housing Market Analysis | Yi-hui Li</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+    <nav class="nav-header">
+        <div class="nav-content">
+            <a href="../index.html" class="back-link">← Back to Portfolio</a>
+            <a href="../pdf/Housing.pdf" target="_blank" class="view-btn">View Full Report</a>
+        </div>
+    </nav>
+
+    <main class="container project-detail-container">
+
+        <section class="project-card">
+            <h2>Housing Market Analysis in Taiwan's Six Major Cities</h2>
+            <p class="project-meta">Econometric Research · R · Panel Data 2013–2023</p>
+            <p class="case-tldr">
+                What drives housing prices — and why do the drivers differ so much by region?
+                Using two-way fixed-effects and interaction models on a decade of panel data,
+                we showed that northern and southern Taiwan follow fundamentally different
+                price mechanisms.
+            </p>
+        </section>
+
+        <section class="project-card" style="padding: 0; overflow: hidden;">
+            <img src="../images/covers/Housing.png" alt="Housing analysis key findings overview" style="width: 100%; display: block;">
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Problem</p>
+            <p>
+                Between 2020 Q1 and 2023 Q1, Taiwan's pre-owned home prices rose 32.7% on
+                average across the six municipalities — up to 49.3% in Tainan. Policy debates
+                treat "housing prices" as one national problem, but if the drivers differ by
+                region, one-size-fits-all policy will miss. We set out to quantify that
+                regional heterogeneity.
+            </p>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Data & Method</p>
+            <ul class="case-list">
+                <li><strong>Panel dataset:</strong> quarterly county-level data, 2013–2023, six municipalities (N = 264). Dependent variable: official housing price index. Seven explanatory variables: construction cost, green space per 10k residents, floor-area supply, household disposable income, net migration, births, and entertainment-industry density.</li>
+                <li><strong>Diagnostics first:</strong> correlation matrix + VIF screening for multicollinearity (all VIF &lt; 10; moderately collinear variables retained on theoretical grounds).</li>
+                <li><strong>Models:</strong> two-way fixed-effects models estimated separately for north vs. central-south, then interaction models (variable × north dummy, and variable × city) to formally test whether effects differ by region.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Key Findings</p>
+            <div class="case-figures">
+                <div class="case-figure">
+                    <p class="fig-value">R² = 0.69 vs 0.15</p>
+                    <p class="fig-label">North model explains prices well; the same variables barely explain the central-south — different mechanisms at work</p>
+                </div>
+                <div class="case-figure">
+                    <p class="fig-value">+3.61 index pts</p>
+                    <p class="fig-label">Effect of one extra hectare of green space per 10k residents on northern prices (p &lt; .001)</p>
+                </div>
+                <div class="case-figure">
+                    <p class="fig-value">Sign flip</p>
+                    <p class="fig-label">Construction cost: negative in the north (land cost dominates ~70% in Taipei), positive in central-south cities</p>
+                </div>
+            </div>
+            <ul class="case-list" style="margin-top: 20px;">
+                <li><strong>Environment quality is a northern premium:</strong> green space significantly raises prices in the north; in the land-rich south, parks aren't scarce enough to command one — except Tainan, where concentrated green space shows the strongest positive effect of all six cities.</li>
+                <li><strong>Income is decoupled from prices in Taipei/New Taipei</strong> (significant negative interaction), consistent with investment-driven demand and spillover of high-income households to peripheral districts. In Taichung and Tainan, income still drives prices the textbook way.</li>
+                <li><strong>Births raise prices only in the double-north</strong> — elsewhere, families face a fertility-vs-housing-cost trade-off that flips the sign.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Business Impact</p>
+            <p>
+                For policy: northern cities should compete on environmental quality; central-south
+                cities need construction-cost control and income growth. For investors: the models
+                identify which fundamentals actually price in per city — e.g., green-space proximity
+                is a priced amenity in Tainan and the north, but not in Kaohsiung.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="minimal-footer">
+        <p>© 2026 Yi-hui (Lydian) Li</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Readmission Prediction | Yi-hui Li</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+    <nav class="nav-header">
+        <div class="nav-content">
+            <a href="../index.html" class="back-link">← Back to Portfolio</a>
+            <div>
+                <!-- TODO: add GitHub repo link when the code is cleaned up
+                <a href="https://github.com/Lyyyy17/REPO_NAME" target="_blank" rel="noopener" class="view-btn" style="margin-right: 10px;">GitHub</a>
+                -->
+                <a href="../pdf/Hospital_Readmission.pdf" target="_blank" class="view-btn">View Full Report</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container project-detail-container">
+
+        <section class="project-card">
+            <h2>Hospital Readmission Prediction</h2>
+            <p class="project-meta">Healthcare Machine Learning · Group Project · Python, SMOTE, Logistic Regression / XGBoost</p>
+            <p class="case-tldr">
+                Built an end-to-end classification pipeline to flag patients at risk of readmission
+                within 14 days of discharge — a window that matters to both hospitals (bed and care
+                resources) and insurers (Taiwan's standard policy clause treats a 14-day readmission
+                as the same hospitalization). The final logistic regression catches 99.9% of
+                readmitted patients, and the project is equally honest about what the data
+                <em>can't</em> do: with AUC ≈ 0.51, the dataset's signal is too weak for true
+                discrimination, so we framed the model as a first-stage risk screening tool, not a
+                decision-maker.
+            </p>
+        </section>
+
+        <section class="project-card" style="padding: 0; overflow: hidden;">
+            <img src="../images/covers/HospitalReadmission.webp" alt="Hospital readmission model results and confusion matrix" style="width: 100%; display: block;">
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Problem</p>
+            <p>
+                Short-term readmissions strain hospital capacity and are a core quality-of-care
+                metric; for insurers, they signal higher claims cost. Both sides share the same pain:
+                high-risk patients are hard to identify <em>before</em> discharge, so follow-up
+                resources get misallocated. The goal: use patient data available at discharge to
+                score each patient's 14-day readmission risk and support triage.
+            </p>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Data &amp; Method</p>
+            <ul class="case-list">
+                <li><strong>Data:</strong> 5,000 patient records, 7 features — age, gender, primary diagnosis, number of procedures, days in hospital, comorbidity score, discharge destination. Univariate tests showed no single feature significantly separated readmitted patients, motivating ML models that can capture non-linear and interaction effects.</li>
+                <li><strong>Class imbalance:</strong> only 18.8% of patients were readmitted. Compared baseline vs. SMOTE, random over-/under-sampling, and SMOTENC on the training split.</li>
+                <li><strong>Models:</strong> Logistic Regression, Random Forest, XGBoost, and SVM, evaluated on Recall, F1, and ROC-AUC (missing a true readmission is the costliest error).</li>
+                <li><strong>Optimization:</strong> feature engineering (age groups, stay buckets, high-risk comorbidity flags, age × comorbidity and other interaction terms) plus decision-threshold tuning on a validation split.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Results</p>
+            <ul class="case-list">
+                <li><strong>Best model:</strong> Logistic Regression with SMOTE and threshold 0.35 — Recall 0.999, F1 0.654, the highest AUC among the four models. Threshold tuning was the single biggest lever: it moved Recall from ~0.5 to 0.999.</li>
+                <li><strong>Feature signals:</strong> age and comorbidity score dominated the coefficients, and engineered terms (age_group, age × comorbidity) entered the top 6 — the model captures age-dependent comorbidity risk rather than a flat linear age effect.</li>
+                <li><strong>The honest read:</strong> all four models landed at AUC 0.49–0.52. High recall came at the cost of flagging nearly everyone (Precision ≈ 48.6%). We diagnosed this as weak signal in the dataset itself — not a modeling failure — which is a finding in its own right.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Business Application</p>
+            <p>
+                We translated the risk score into an insurer-facing early-warning workflow: high-risk
+                patients enter a 14-day post-discharge follow-up list, medium-risk patients get
+                medication and appointment reminders, low-risk patients receive standard digital
+                care. Because insurers already hold claims and hospitalization records, the model
+                slots in as a first-stage screening layer that helps care-management teams decide
+                whom to contact first — assisting triage rather than underwriting, which keeps the
+                deployment barrier low.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="minimal-footer">
+        <p>© 2026 Yi-hui (Lydian) Li</p>
+    </footer>
+
+</body>
+</html>

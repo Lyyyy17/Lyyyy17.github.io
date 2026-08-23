@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer & Purchase Willingness | Yi-hui Li</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+    <nav class="nav-header">
+        <div class="nav-content">
+            <a href="../index.html" class="back-link">← Back to Portfolio</a>
+            <a href="../pdf/countdown.pdf" target="_blank" class="view-btn">View Full Report</a>
+        </div>
+    </nav>
+
+    <main class="container project-detail-container">
+
+        <section class="project-card">
+            <h2>The Impact of Countdown Timer on Purchase Willingness</h2>
+            <p class="project-meta">Marketing Research · A/B Survey Experiment · JASP</p>
+            <p class="case-tldr">
+                Countdown timers don't directly increase purchase intention — but they work
+                indirectly by raising perceived product scarcity. We proved it with a randomized
+                A/B experiment and mediation analysis on 183 valid responses.
+            </p>
+        </section>
+
+        <section class="project-card" style="padding: 0; overflow: hidden;">
+            <img src="../images/covers/CountdownTimer.png" alt="Countdown timer mediation results overview" style="width: 100%; display: block;">
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Problem</p>
+            <p>
+                E-commerce platforms use countdown timers everywhere, assuming time pressure
+                drives conversion. But does it actually work — and if so, through what
+                psychological mechanism? We designed an experiment to separate the direct
+                effect of timers from their indirect effects through anxiety, "feeling smart,"
+                and perceived scarcity.
+            </p>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Data & Method</p>
+            <ul class="case-list">
+                <li><strong>Randomized A/B survey experiment</strong> (Google Forms): one group saw a product page with a countdown timer, the other without. Attention-check questions filtered out invalid responses — 183 valid out of 226 collected (ages 15–62, three countries).</li>
+                <li><strong>Reliability checks:</strong> all multi-item constructs reached Cronbach's α ≥ 0.79 (anxiety 0.61), with significant inter-item correlations.</li>
+                <li><strong>Analysis pipeline:</strong> chi-square test for the main effect, mediation analysis for three psychological pathways, and moderated logistic regression for five individual-difference variables (age, income, gender, impulsivity, discount sensitivity).</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Key Findings</p>
+            <div class="case-figures">
+                <div class="case-figure">
+                    <p class="fig-value">p = 0.125</p>
+                    <p class="fig-label">No significant direct effect of timers on purchase (chi-square) — the common assumption fails</p>
+                </div>
+                <div class="case-figure">
+                    <p class="fig-value">p = 0.037</p>
+                    <p class="fig-label">Significant indirect effect via perceived scarcity (mediation estimate 0.067)</p>
+                </div>
+                <div class="case-figure">
+                    <p class="fig-value">R² = 0.298</p>
+                    <p class="fig-label">McFadden pseudo-R² of the full logistic model (Δχ² = 74.5, p &lt; .001)</p>
+                </div>
+            </div>
+            <ul class="case-list" style="margin-top: 20px;">
+                <li>Timers influence purchase <strong>only through perceived scarcity</strong> — the anxiety and "feeling smart" pathways were both non-significant.</li>
+                <li>The strongest direct drivers of purchase were <strong>feeling smart about the deal</strong> (p &lt; .01), <strong>discount sensitivity</strong> (p &lt; .05), and <strong>age</strong> (p &lt; .05) — not time pressure.</li>
+                <li>None of the five moderation hypotheses held: the timer effect doesn't vary by impulsivity, discount sensitivity, age, income, or gender.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Business Impact</p>
+            <p>
+                A countdown timer alone won't lift conversion. It works by creating a
+                psychological context of scarcity — so it should be paired with genuine
+                scarcity cues and "smart deal" framing, and targeted at discount-sensitive
+                segments, rather than deployed as a blanket urgency tactic.
+            </p>
+        </section>
+
+        <section class="project-card">
+            <div class="card-image">
+                <img src="../images/Countdown_1.png" alt="Countdown timer experiment design and results">
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="minimal-footer">
+        <p>© 2026 Yi-hui (Lydian) Li</p>
+    </footer>
+
+</body>
+</html>

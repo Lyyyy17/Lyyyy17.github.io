@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTBC Bank — Agent × MCP Payment Advisor | Yi-hui Li</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+    <nav class="nav-header">
+        <div class="nav-content">
+            <a href="../index.html" class="back-link">← Back to Portfolio</a>
+            <div>
+                <a href="https://github.com/Gene-Liu-portfolio/ctbc-payment-advisor" target="_blank" rel="noopener" class="view-btn" style="margin-right: 10px;">GitHub</a>
+                <a href="../pdf/CTBC_MCP.pdf" target="_blank" class="view-btn">View Poster</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container project-detail-container">
+
+        <section class="project-card">
+            <h2>CTBC Bank — Agent × MCP Payment Advisor</h2>
+            <p class="project-meta">Fintech · CTBC Internship Team Project · Python, FastMCP, Claude API, React, Render · Architecture v8.1</p>
+            <p class="case-tldr">
+                Credit-card rewards are scattered across fine print, so choosing which card to swipe
+                is a real decision cost. Our team built a payment recommendation service on the
+                <strong>Claude × Model Context Protocol (MCP)</strong> architecture: the LLM
+                interprets a natural-language spending scenario ("buying a NT$5,000 haul at Costco"),
+                but every reward calculation runs in a deterministic, bank-owned backend. The service
+                is live on Render with a public <code>/mcp</code> endpoint — any remote-MCP client,
+                such as Cursor, can connect and use the recommendation tools directly, no clone or
+                API key required.
+            </p>
+        </section>
+
+        <section class="project-card" style="padding: 0; overflow: hidden;">
+            <img src="../images/covers/CTBC_MCP.webp" alt="CTBC payment advisor system architecture overview" style="width: 100%; display: block;">
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Problem</p>
+            <p>
+                Card benefits change constantly, differ by channel, and come with caps and
+                conditions. Existing tools are static comparison tables or scripted chatbots that
+                can't answer situational questions. A user who already knows what they're about to
+                buy just wants one answer: <em>which of my cards earns the most here?</em>
+            </p>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Why MCP (Not Just Function Calling)</p>
+            <p>
+                Pure function calling can handle tool invocation, but when card rules change it
+                produces unstable recommendations (the LLM reasons about rewards directly), is hard
+                to maintain, and can't share tools across applications. MCP fixes the division of
+                labor: <strong>the LLM understands the user and picks tools; the backend owns the
+                truth.</strong>
+            </p>
+            <ul class="case-list">
+                <li><strong>Reliable numbers:</strong> reward logic, card data, and constraints live in the MCP server, not in the prompt. Tools only read from validated card data (<code>merged_cards.json</code>), the channel mapping table, and backend calculation logic — the LLM never invents a card, promo, or cashback rate.</li>
+                <li><strong>Reusable interface:</strong> the same <code>/mcp</code> serves the web demo, Claude MCP Connector, Cursor, or a bank's future channels (mobile banking, customer-service tools) — no per-client function schemas to rewrite.</li>
+                <li><strong>Permission boundary:</strong> the user's selected card list (<code>cards_owned</code>) is a hard constraint. It is written into the chat system prompt to restrict Claude's tool calls, re-validated against canonical card data on the backend, and used directly by the deterministic REST/SSE flow — so the agent can only recommend cards the user actually holds, and the same boundary maps cleanly onto a future bank login session.</li>
+                <li><strong>Rules stay bank-owned:</strong> ranking logic, promo conditions, data updates, and fallback rules are maintained in the controlled service; prompts only guide <em>when</em> to call tools, never <em>what the numbers are</em>.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">How It Works</p>
+            <ul class="case-list">
+                <li><strong>Flow:</strong> user selects held cards → describes the purchase in natural language → the agent parses intent and channel → calls MCP tools → backend computes and ranks rewards → returns top cards with reasons.</li>
+                <li><strong>Two modes:</strong> a standard recommendation mode streaming structured SSE for fast deterministic results, and an <strong>Agent mode</strong> where Claude calls <code>/mcp</code> through the real MCP Connector — the UI surfaces each tool use and tool result, making the agent's reasoning transparent instead of a black box.</li>
+                <li><strong>MCP tools:</strong> <code>recommend_payment</code> (parse scenario → full recommendation), <code>search_by_channel</code>, <code>compare_cards</code>, <code>get_promotions</code>, <code>get_card_details</code>, <code>list_all_cards</code>, plus MCP Resources exposing per-card JSON (<code>card://ctbc/{card_id}</code>) and the channel taxonomy.</li>
+                <li><strong>Recommendation logic:</strong> (1) normalize free-text merchants into 17 standard channels, with a general-spending fallback that extracts merchant keywords when no channel matches; (2) two-layer search — limited-time promotions first, then each card's base channel rewards, with the fallback rate explicitly labeled as a floor; (3) compute spend × reward rate, always capped against the card's reward ceiling, and rank a Top 3 by both estimated reward and reward rate.</li>
+                <li><strong>Architecture:</strong> React front end; Starlette + uvicorn on Render serving REST, structured SSE, and FastMCP's <code>/mcp</code> Streamable HTTP from one ASGI service; card data covers 6 CTBC co-branded cards plus 7 non-CTBC cards included as benchmark data for cross-bank recommendation logic.</li>
+            </ul>
+        </section>
+
+        <section class="project-card" style="padding: 0; overflow: hidden;">
+            <img src="../images/mcp_system.webp" alt="System architecture diagram: React dual-mode UI, unified Starlette backend exposing /api and /mcp, Claude MCP Connector, runtime card data, and build-time data pipeline" style="width: 100%; display: block;">
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Try It from Any MCP Client</p>
+            <p>
+                The endpoint is public — point Cursor (or any client supporting remote MCP over
+                Streamable HTTP) at:
+            </p>
+            <p style="margin: 12px 0;">
+                <code>https://ctbc-payment-advisor.onrender.com/mcp</code>
+            </p>
+            <p>
+                Then ask something like <em>"用 ctbc-payment-advisor 比較 LINE Pay卡和 momo聯名卡，
+                在 momo 消費 3000 元哪張比較划算"</em> — your own agent does the reasoning; this
+                service supplies the card data, reward math, and rankings.
+            </p>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Engineering Practice</p>
+            <ul class="case-list">
+                <li><strong>Tested like a product:</strong> pytest covers recommendation logic, data contracts, MCP tool results, and the SSE contract; Playwright covers web E2E; CI runs on every push (Node 22 / uv toolchain).</li>
+                <li><strong>Data integrity:</strong> the card runtime schema is versioned (<code>card_schema.json</code>), scraped bank data passes a validation step before merging, and non-cash rewards (LINE Points, OPENPOINT, miles) are never silently converted into NT$ cashback.</li>
+                <li><strong>Security scoping:</strong> the public endpoint exposes only deterministic query/recommendation tools — no admin tools, no data-reload, no secrets, no customer data; production deployments would restrict origins via <code>ALLOWED_ORIGINS</code>.</li>
+            </ul>
+            <p>
+                Built with three teammates during the CTBC internship. Fubon cards in the dataset are
+                benchmark data for testing cross-bank logic, not partner data.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="minimal-footer">
+        <p>© 2026 Yi-hui (Lydian) Li</p>
+    </footer>
+
+</body>
+</html>

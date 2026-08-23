@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KKBOX AI Playlist Insights | Yi-hui Li</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+    <nav class="nav-header">
+        <div class="nav-content">
+            <a href="../index.html" class="back-link">← Back to Portfolio</a>
+            <a href="../pdf/KKBOX_Report.pdf" target="_blank" class="view-btn">View Full Report</a>
+        </div>
+    </nav>
+
+    <main class="container project-detail-container">
+
+        <section class="project-card">
+            <h2>KKBOX AI Playlist Usage Insights and New Positioning</h2>
+            <p class="project-meta">Corporate Partnership · NTU Data Analytics Club · Python, SBERT, K-Means</p>
+            <p class="case-tldr">
+                By clustering how users actually talk to KKBOX's AI playlist feature, I found
+                the product was being used for precision search — not the discovery experience
+                it was designed for. That insight pivoted the product's positioning and was
+                adopted company-wide.
+            </p>
+        </section>
+
+        <section class="project-card" style="padding: 0; overflow: hidden;">
+            <img src="../images/covers/KKBOX.png" alt="KKBOX case-study key chart" style="width: 100%; display: block;">
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Problem</p>
+            <p>
+                KKBOX launched an AI-powered playlist feature and needed to know: how are users
+                actually using it, and does that match the product vision? Raw usage logs and
+                free-text prompts don't answer that by themselves — the user intent hidden in
+                thousands of prompts had to be structured first.
+            </p>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Data & Method</p>
+            <ul class="case-list">
+                <li><strong>Intent mining:</strong> embedded user prompts with SBERT (sentence-level transformer embeddings), then clustered them with K-Means to surface distinct usage-intent groups.</li>
+                <li><strong>Cluster interpretation:</strong> profiled each cluster against the product's intended use cases to locate where user behavior diverged from design assumptions.</li>
+                <li><strong>From insight to intervention:</strong> designed a guided prompt framework to steer users toward higher-satisfaction interactions, plus a community-based deployment strategy for rollout.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Key Findings</p>
+            <ul class="case-list">
+                <li><strong>The User Expectation Gap:</strong> users were leveraging the AI for <strong>precision searching</strong> ("find me exactly this") rather than <strong>discovery</strong> ("surprise me") — the opposite of the feature's original positioning.</li>
+                <li>Because intent clustered so clearly, the fix wasn't a better model — it was <strong>better interaction design</strong>: guiding users to express intent the AI handles well.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Business Impact</p>
+            <p>
+                The analysis pivoted the feature's product direction. The guided prompt framework
+                and community-based deployment strategy I proposed were adopted at full scale by
+                the company — turning a usage-analytics project into a repositioning decision.
+            </p>
+        </section>
+
+        <section class="project-card">
+            <div class="card-image">
+                <img src="../images/KKBOX_1.png" alt="KKBOX AI playlist intent clustering analysis">
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="minimal-footer">
+        <p>© 2026 Yi-hui (Lydian) Li</p>
+    </footer>
+
+</body>
+</html>

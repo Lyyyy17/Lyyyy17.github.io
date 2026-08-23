@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer Spending Power Analysis | Yi-hui Li</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+    <nav class="nav-header">
+        <div class="nav-content">
+            <a href="../index.html" class="back-link">← Back to Portfolio</a>
+            <a href="../pdf/Purchasing.pdf" target="_blank" class="view-btn">View Full Report</a>
+        </div>
+    </nav>
+
+    <main class="container project-detail-container">
+
+        <section class="project-card">
+            <h2>Consumer Spending Power Analysis</h2>
+            <p class="project-meta">Statistical Inference Coursework · R</p>
+            <p class="case-tldr">
+                A rigorous hypothesis-testing workflow on a 2,000-record customer dataset — where
+                the most valuable finding was a null result: spending power turned out to be largely
+                independent of gender, occupation, and income, and we resisted the temptation to
+                claim otherwise.
+            </p>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Problem</p>
+            <p>
+                Do demographics predict spending power? Retailers routinely segment on gender,
+                occupation, and income. Using a Kaggle customer dataset (n = 2,000, simulated),
+                we tested whether those segments actually differ in spending score — treating it
+                as an exercise in running the full inference toolkit correctly.
+            </p>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Data & Method</p>
+            <ul class="case-list">
+                <li><strong>Descriptive profiling</strong> of discrete (gender, occupation, family size, work experience) and continuous (income, age, spending score) variables.</li>
+                <li><strong>Inference pipeline in R:</strong> one-sample proportion test; F-test for variance equality before choosing the pooled two-sample t-test; one-way ANOVA with Tukey's HSD post-hoc verification; simple and multiple regression with dummy-coded categorical variables.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Key Findings</p>
+            <div class="case-figures">
+                <div class="case-figure">
+                    <p class="fig-value">p &lt; 2.2e-16</p>
+                    <p class="fig-label">The only strong effect: female share of the customer base significantly exceeds 50%</p>
+                </div>
+                <div class="case-figure">
+                    <p class="fig-value">p = 0.98</p>
+                    <p class="fig-label">No gender difference in spending power (pooled t-test, after F-test confirmed equal variances)</p>
+                </div>
+                <div class="case-figure">
+                    <p class="fig-value">p = 0.454</p>
+                    <p class="fig-label">No occupation effect (ANOVA); all Tukey HSD pairwise intervals include zero</p>
+                </div>
+            </div>
+            <ul class="case-list" style="margin-top: 20px;">
+                <li>Income and age slopes were also non-significant (p = .298 and p = .062) — spending score in this dataset is essentially noise with respect to demographics.</li>
+                <li>The discipline shown: verify test assumptions first (F-test before t-test), confirm ANOVA conclusions with post-hoc intervals, and report nulls as nulls.</li>
+            </ul>
+        </section>
+
+        <section class="project-card">
+            <p class="case-label">Takeaway</p>
+            <p>
+                In business terms: had this been real data, demographic segmentation would have been
+                a waste of marketing budget — behavioral variables would be the next place to look.
+                Knowing when the data says "no effect" is as important as finding one.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="minimal-footer">
+        <p>© 2026 Yi-hui (Lydian) Li</p>
+    </footer>
+
+</body>
+</html>
